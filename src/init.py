@@ -5,7 +5,7 @@
 def init():
 	import cPickle as cp
 	print 'input'
-	fin=file('xjc.dat')
+	fin=file('kanjic2j/xjc.dat')
 	xjc=cp.load(fin)
 	fin.close()
 	xcj={}
@@ -15,7 +15,7 @@ def init():
 		else:
 			xcj[ch]=[ja]
 	print 'output'
-	fout=file('xcj.dat','wb')
+	fout=file('kanjic2j/xcj.dat','wb')
 	cp.dump(xcj,fout)
 	fout.close()
 	print 'Done.'

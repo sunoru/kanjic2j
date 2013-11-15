@@ -1,11 +1,20 @@
 #!python
-# filename : kanjic2j.py
+# filename : kanjic2j/core.py
 # core of kanjic2j
 
 import codecs
 xcj=xjc={}
+import sys,os
+def cur_file_dir():
+	path = sys.path[0]
+	if os.path.isdir(path):
+		return path
+	elif os.path.isfile(path):
+		return os.path.dirname(path)
+print cur_file_dir()
 def init():
 	global xcj,xjc
+	mpath=cur_file_dir()
 	print 'Initializing..'
 	import cPickle as cp
 	print 'Loading xcj..',
