@@ -5,25 +5,18 @@
 import codecs
 xcj=xjc={}
 import sys,os
-def cur_file_dir():
-	path = sys.path[0]
-	if os.path.isdir(path):
-		return path
-	elif os.path.isfile(path):
-		return os.path.dirname(path)
-print cur_file_dir()
+
 def init():
 	global xcj,xjc
-	mpath=cur_file_dir()
 	print 'Initializing..'
 	import cPickle as cp
 	print 'Loading xcj..',
-	f1=file('xcj.dat')
+	f1=file(os.path.join(os.path.dirname(__file__),'xcj.dat'))
 	xcj=cp.load(f1)
 	f1.close()
 	print 'Done!'
 	print 'Loading xjc..',
-	f1=file('xjc.dat')
+	f1=file(os.path.join(os.path.dirname(__file__),'xjc.dat'))
 	xjc=cp.load(f1)
 	f1.close()
 	print 'Done!'
@@ -42,7 +35,12 @@ class Kjfile:
 			self.data=ain
 		else:
 			self.data=unicode('unknown input','utf-8')
-	@classmethod
+		if self.data.find('\r\n'):
+			self.linebreak='\r\n'
+		elif self.data.find('\r'):
+			self.linebreak='\r'
+		else:
+			self.linebreak='\n'
 	def file_open(self,ain):
 		if type(ain)==str:
 			try:
@@ -55,11 +53,10 @@ class Kjfile:
 				ain.close()
 		else:
 			self.data=unicode(ain.read(),'utf-8')
-	@classmethod
-	def file_save(self,aout):
+	def file_save(self,aout,linebreak=self.linebreak):
 		if type(aout)==str:
 			aout=codecs.open(aout,'w','utf-8')
-			aout.write(self.data)
+			aout.write(self.data.replace(self.linebreak,linebreak))
 			aout.close()
 	@staticmethod
 	def workdanji(ach):
