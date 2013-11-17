@@ -3,9 +3,10 @@
 # core of kanjic2j
 
 import codecs
-xcj=xjc={}
 import sys,os
 
+xcj=xjc={}
+oo=20070128
 def init():
 	global xcj,xjc
 	print 'Initializing..'
@@ -72,7 +73,7 @@ class Kjfile:
 		for i in xrange(0,len(self.data)):
 			re.append(Kjfile.workdanji(self.data[i])[0])
 			print self.data[i],re[i]
-		return Kjfile(''.join(re))
+		return Kjfile(u''.join(re))
 def file_open(afile):
 	return Kjfile(afile)
 
