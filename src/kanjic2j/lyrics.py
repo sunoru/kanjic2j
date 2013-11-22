@@ -22,9 +22,14 @@ class Lyrics(Kjfile):
 		'\n','/','.','(',')'
 		u'。',u'（',u'）'
 		]
-	def __init__(self):
-		Kjfile.__init__(self)
+	def __init__(self,ain,ehandle=None):
+		Kjfile.__init__(self,ain)
 		self.__split()
+		self.handle=ehandle if ehandle!=None else Lyrics.__shandle
+	@staticmethod
+	def __shandle(x):
+		"return a choice"
+		return x[0]
 	def __prepare(self):
 		self.data=self.data.replace(self.linebreak,'\n')
 		if self.data[len(self.data)-1]!='\n':
@@ -41,7 +46,7 @@ class Lyrics(Kjfile):
 	@staticmethod
 	def __test(tmpstr):
 		for ea in Lyrics.__kanas:
-			if tmpstr.find(ea):
+			if tmpstr.find(ea)>=0:
 				return True
 		return False
 
@@ -57,19 +62,23 @@ class Lyrics(Kjfile):
 				break
 			self.__tmpstr.append(self.data[u:v])
 			self.__sps.append(sp)
-			self.__flags.append(Lyrics.__test(self.__tmpstr[len(self.__tmpstr)]))
+			self.__flags.append(Lyrics.__test(self.__tmpstr[-1]))
 			u=v+1
 
-	@staticmethod
-	def worksent(mstr):
+	def worksent(self,mstr):
 		xtmp=[]
 		for l in xrange(0,len(mstr)):
-			xtmp.append(Lyrics.workdanji(mstr[l])[0])
+			qtmp=Lyrics.workdanji(mstr[l])
+			xtmp.append(self.handle(qtmp))
 		return u''.join(xtmp)
 	def work(self):
 		ptmp=[]
 		for i in xrange(0,len(self.__tmpstr)):
 			ptmp.append(self.__sps[i])
-			ptmp[i]+=Lyrics.worksent(self.__tmpstr[i]) if self.__flags[i] else self.__tmstr[i]
+			if self.__flags[i]:
+				ptmp[i]+=self.worksent(self.__tmpstr[i])
+			else:
+				ptmp[i]+=self.__tmpstr[i]
+		ptmp.append(self.__sps[-1])
 		return Kjfile(u''.join(ptmp))
 		

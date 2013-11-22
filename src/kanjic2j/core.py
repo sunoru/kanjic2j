@@ -36,9 +36,9 @@ class Kjfile:
 			self.data=ain
 		else:
 			self.data=unicode('unknown input','utf-8')
-		if self.data.find('\r\n'):
+		if self.data.find('\r\n')>=0:
 			self.linebreak='\r\n'
-		elif self.data.find('\r'):
+		elif self.data.find('\r')>=0:
 			self.linebreak='\r'
 		else:
 			self.linebreak='\n'
