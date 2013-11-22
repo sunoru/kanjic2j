@@ -54,7 +54,9 @@ class Kjfile:
 				ain.close()
 		else:
 			self.data=unicode(ain.read(),'utf-8')
-	def file_save(self,aout,linebreak=self.linebreak):
+	def file_save(self,aout,linebreak=''):
+		if linebreak=='':
+			linebreak=self.linebreak
 		if type(aout)==str:
 			aout=codecs.open(aout,'w','utf-8')
 			aout.write(self.data.replace(self.linebreak,linebreak))
