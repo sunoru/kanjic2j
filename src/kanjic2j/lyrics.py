@@ -19,7 +19,7 @@ class Lyrics(Kjfile):
 		u"の",u"ノ",u"と",u"ト",u"そ",u"ソ",u"こ",u"コ",u"お",u"オ"
 		]
 	__splitch=[
-		'\n','/','.','(',')'
+		'\n','/','.','(',')','\t',' ',
 		u'。',u'（',u'）'
 		]
 	def __init__(self,ain,ehandle=None):
@@ -45,6 +45,8 @@ class Lyrics(Kjfile):
 		return t1,t2
 	@staticmethod
 	def __test(tmpstr):
+		if len(tmpstr)<3:
+			return True
 		for ea in Lyrics.__kanas:
 			if tmpstr.find(ea)>=0:
 				return True
