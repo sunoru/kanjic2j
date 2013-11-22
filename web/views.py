@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 import kanjic2j as kj
-from kanji.forms import KanjiForm
-from kanji.models import Log
+from kanjic2j_web.forms import KanjiForm
+from kanjic2j_web.models import Log
 from django.utils import timezone
 
 def index(request):
@@ -17,7 +17,6 @@ def index(request):
 				address=request.META['HTTP_X_FORWARDED_FOR'] if
 				request.META.has_key('HTTP_X_FORWARDED_FOR') else
 				request.META['REMOTE_ADDR'])
-			print mxp
 			mxp.save()
 	else:
 		form = KanjiForm()
