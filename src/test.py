@@ -4,7 +4,7 @@
 
 def test1():
 	import cPickle as cp
-	q=file('kanjic2j/xcj.dat')
+	q=file('kanjic2j/kanjic2j_xcj.dat')
 	x=cp.load(q)
 	def qt(t):
 		for ea in x[t]:

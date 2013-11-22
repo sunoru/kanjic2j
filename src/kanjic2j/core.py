@@ -12,12 +12,12 @@ def init():
 	print 'Initializing..'
 	import cPickle as cp
 	print 'Loading xcj..',
-	f1=file(os.path.join(os.path.dirname(__file__),'xcj.dat'))
+	f1=file(os.path.join(os.path.dirname(__file__),'kanjic2j_xcj.dat'))
 	xcj=cp.load(f1)
 	f1.close()
 	print 'Done!'
 	print 'Loading xjc..',
-	f1=file(os.path.join(os.path.dirname(__file__),'xjc.dat'))
+	f1=file(os.path.join(os.path.dirname(__file__),'kanjic2j_xjc.dat'))
 	xjc=cp.load(f1)
 	f1.close()
 	print 'Done!'
