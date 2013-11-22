@@ -57,7 +57,7 @@ class Lyrics(Kjfile):
 				break
 			self.__tmpstr.append(self.data[u:v])
 			self.__sps.append(sp)
-			self.__flags.append(Lyrics.__test(self.__tmpstr[len(self.__tmpstr)])
+			self.__flags.append(Lyrics.__test(self.__tmpstr[len(self.__tmpstr)]))
 			u=v+1
 
 	@staticmethod
