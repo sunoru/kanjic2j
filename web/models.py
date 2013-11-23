@@ -5,4 +5,6 @@ class Log(models.Model):
 	filename = models.CharField(max_length=30)
 	use_time = models.TimeField()
 	address = models.IPAddressField()
+	def __unicode__(self):
+		return self.filename.replace('\n','')+'\t'+self.address
 
