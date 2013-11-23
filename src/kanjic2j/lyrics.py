@@ -27,8 +27,8 @@ class Lyrics(Kjfile):
 		]
 	__splitch=[
 		'\n','/','.','(',')','\t',' ',
-		u'。',u'（',u'）',u'【',u'】',
-		]
+		u'。',u'（',u'）',u'【',u'】',u'』',u'」',u'「',u'『',
+	]
 	def __init__(self,ain,ehandle=None):
 		Kjfile.__init__(self,ain)
 		self.__split()
