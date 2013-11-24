@@ -29,6 +29,9 @@ class Lyrics(Kjfile):
 		'\n','/','.','(',')','\t',' ',
 		u'。',u'（',u'）',u'【',u'】',u'』',u'」',u'「',u'『',
 	]
+	__special=[
+		u'凋叶棕',
+	]
 	def __init__(self,ain,ehandle=None):
 		Kjfile.__init__(self,ain)
 		self.__split()
@@ -45,6 +48,11 @@ class Lyrics(Kjfile):
 		t1=oo
 		t2=''
 		for ea in Lyrics.__splitch:
+			xp=self.data.find(ea,now)
+			if (xp>0)and(xp<t1):
+				t1=xp
+				t2=ea
+		for ea in Lyrics.__special:
 			xp=self.data.find(ea,now)
 			if (xp>0)and(xp<t1):
 				t1=xp
@@ -72,7 +80,7 @@ class Lyrics(Kjfile):
 			self.__tmpstr.append(self.data[u:v])
 			self.__sps.append(sp)
 			self.__flags.append(Lyrics.__test(self.__tmpstr[-1]))
-			u=v+1
+			u=v+len(sp)
 
 	def worksent(self,mstr):
 		xtmp=[]
