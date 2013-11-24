@@ -1,2 +1,4 @@
-src/kanjic2j/*.pyc
-web/*.pyc
+*.pyc
+*.sh
+release/kanjic2j
+release/kanjic2j_web
