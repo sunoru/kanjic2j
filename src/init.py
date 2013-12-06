@@ -31,6 +31,7 @@ def edit():
 			tt=e2[1]
 			e2[1]=e2[0]
 			e2[0]=tt
+			print e1,' ',e2[0],' ',e2[1]
 	fout=file('kanjic2j/kanjic2j_xcj.dat','wb')
 	cp.dump(xcj,fout)
 	fout.close()
@@ -54,6 +55,6 @@ def edit2():
 	print 'Done!'
 if __name__=='__main__':
 	#init()
-	#edit()
-	edit2()
+	edit()
+	#edit2()
 
