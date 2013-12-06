@@ -1,4 +1,5 @@
 #!python
+# -*- coding: utf-8 -*-
 # filename : init.py
 # initialization for kanjic2j
 
@@ -34,7 +35,25 @@ def edit():
 	cp.dump(xcj,fout)
 	fout.close()
 	print 'Done!'
+def edit2():
+	import cPickle as cp
+	fin=file('kanjic2j/kanjic2j_xcj.dat','rb')
+	xcj=cp.load(fin)
+	fin.close()
+	xcj[u'谁']=[u'誰']
+	fout=file('kanjic2j/kanjic2j_xcj.dat','wb')
+	cp.dump(xcj,fout)
+	fout.close()
+	fin=file('kanjic2j/kanjic2j_xjc.dat','rb')
+	xjc=cp.load(fin)
+	fin.close()
+	xjc[u'誰']=u'谁'
+	fout=file('kanjic2j/kanjic2j_xjc.dat','wb')
+	cp.dump(xjc,fout)
+	fout.close()
+	print 'Done!'
 if __name__=='__main__':
 	#init()
-	edit()
+	#edit()
+	edit2()
 
