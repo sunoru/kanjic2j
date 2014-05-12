@@ -34,10 +34,10 @@ class Kjfile:
     global xcj
     mxcj = xcj
 
-    def __init__(self, ain):
-        if (type(ain) == str)or(type(ain) == file):
-            self.file_open(ain)
-        elif type(ain) == unicode:
+    def __init__(self, ain, meta=None):
+        if (isinstance(ain, str))or(isinstance(ain, file)):
+            self.open_file(ain)
+        elif isinstance(ain, unicode):
             self.data = ain
         else:
             self.data = unicode('unknown input', 'utf-8')
@@ -47,9 +47,10 @@ class Kjfile:
             self.linebreak = '\r'
         else:
             self.linebreak = '\n'
+        self.meta = meta
 
-    def file_open(self, ain):
-        if type(ain) == str:
+    def open_file(self, ain):
+        if isinstance(ain, str):
             try:
                 ain = codecs.open(ain, 'r', 'utf-8')
                 self.data = ain.read()
@@ -61,8 +62,8 @@ class Kjfile:
         else:
             self.data = unicode(ain.read(), 'utf-8')
 
-    def file_save(self, aout, linebreak=''):
-        if linebreak == '':
+    def save_file(self, aout, linebreak=None):
+        if linebreak is None:
             linebreak = self.linebreak
         if type(aout) == str:
             aout = codecs.open(aout, 'w', 'utf-8')
@@ -74,18 +75,22 @@ class Kjfile:
         if Kjfile.mxcj.has_key(ach):
             return Kjfile.mxcj[ach]
         else:
-            return ach
+            return (ach,)
 
     def work(self):
         '''
         need to be override
         '''
         re = []
+        meta = []
         for i in xrange(0, len(self.data)):
-            re.append(Kjfile.workdanji(self.data[i])[0])
+        	tmp = Kjfile.workdanji(self.data[i])
+        	if len(tmp) > 1:
+        		meta.append(i)
+            re.append(tmp[0])
             print self.data[i], re[i]
-        return Kjfile(u''.join(re))
+        return Kjfile(u''.join(re), meta)
 
 
-def file_open(afile):
+def open_file(afile):
     return Kjfile(afile)

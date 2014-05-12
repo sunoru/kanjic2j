@@ -35,15 +35,9 @@ class Lyrics(Kjfile):
         u'凋叶棕',
     ]
 
-    def __init__(self, ain, ehandle=None):
-        Kjfile.__init__(self, ain)
+    def __init__(self, ain, meta=None):
+        Kjfile.__init__(self, ain, meta)
         self.__split()
-        self.handle = ehandle if ehandle != None else Lyrics.__shandle
-
-    @staticmethod
-    def __shandle(x):
-        "return a choice"
-        return x[0]
 
     def __prepare(self):
         self.data = self.data.replace(self.linebreak, '\n')
@@ -52,7 +46,7 @@ class Lyrics(Kjfile):
 
     def __findnext(self, now):
         t1 = oo
-        t2 = ''
+        t2 = None
         for ea in Lyrics.__splitch:
             xp = self.data.find(ea, now)
             if (xp > 0)and(xp < t1):
@@ -82,7 +76,7 @@ class Lyrics(Kjfile):
         u = 0
         while True:
             v, sp = self.__findnext(u)
-            if sp == '':
+            if sp is None:
                 break
             self.__tmpstr.append(self.data[u:v])
             self.__sps.append(sp)
@@ -91,18 +85,25 @@ class Lyrics(Kjfile):
 
     def worksent(self, mstr):
         xtmp = []
+        meta = []
         for l in xrange(0, len(mstr)):
             qtmp = Lyrics.workdanji(mstr[l])
-            xtmp.append(self.handle(qtmp))
-        return u''.join(xtmp)
+            xtmp.append(qtmp[0])
+            if len(qtmp) > 0:
+            	meta.append(l)
+        return (u''.join(xtmp), meta)
 
     def work(self):
         ptmp = []
+        meta = []
         for i in xrange(0, len(self.__tmpstr)):
             ptmp.append(self.__sps[i])
             if self.__flags[i]:
-                ptmp[i] += self.worksent(self.__tmpstr[i])
+                p1, p2 = self.worksent(self.__tmpstr[i])
+                ptmp[i] += p1
+                if len(p2) > 0:
+                    meta.append((i, p2))
             else:
                 ptmp[i] += self.__tmpstr[i]
         ptmp.append(self.__sps[-1])
-        return Kjfile(u''.join(ptmp))
+        return Kjfile(u''.join(ptmp), meta)
