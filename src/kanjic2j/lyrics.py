@@ -35,8 +35,8 @@ class Lyrics(Kjfile):
         u'凋叶棕',
     ]
 
-    def __init__(self, ain, meta=None):
-        Kjfile.__init__(self, ain, meta)
+    def __init__(self, ain):
+        Kjfile.__init__(self, ain)
         self.__split()
 
     def __prepare(self):
@@ -92,6 +92,7 @@ class Lyrics(Kjfile):
 
     def work(self):
         ptmp = []
+        print self.__flags
         for i in xrange(0, len(self.__tmpstr)):
             ptmp.append(self.__sps[i])
             if self.__flags[i]:

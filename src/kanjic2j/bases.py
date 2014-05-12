@@ -34,7 +34,7 @@ class Kjfile:
     global xcj
     mxcj = xcj
 
-    def __init__(self, ain, meta=None):
+    def __init__(self, ain):
         if (isinstance(ain, str))or(isinstance(ain, file)):
             self.open_file(ain)
         elif isinstance(ain, unicode):
@@ -47,7 +47,6 @@ class Kjfile:
             self.linebreak = '\r'
         else:
             self.linebreak = '\n'
-        self.meta = meta
 
     def open_file(self, ain):
         if isinstance(ain, str):
@@ -82,14 +81,10 @@ class Kjfile:
         need to be override
         '''
         re = []
-        meta = []
         for i in xrange(0, len(self.data)):
             tmp = Kjfile.workdanji(self.data[i])
-            if len(tmp) > 1:
-                meta.append(i)
             re.append(tmp[0])
-            print self.data[i], re[i]
-        return Kjfile(u''.join(re), meta)
+        return Kjfile(u''.join(re))
 
 
 def open_file(afile):

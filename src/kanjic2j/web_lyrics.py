@@ -9,12 +9,15 @@ from .lyrics import *
 class WebLyrics(Lyrics):
     __hightlight = "<span class='hred'>%s</span>"
 
+    def __init__(self, ain, hightlight=None):
+        Lyrics.__init__(self, ain)
+        self.hightlight = hightlight if hightlight is not None else WebLyrics.__hightlight
     def worksent(self, mstr):
         xtmp = []
         for l in xrange(0, len(mstr)):
             qtmp = Lyrics.workdanji(mstr[l])
             if len(qtmp) > 1:
-                xtmp.append(__hightlight % qtmp[0])
+                xtmp.append(self.hightlight % qtmp[0])
             else:
                 xtmp.append(qtmp[0])
         return u''.join(xtmp)
