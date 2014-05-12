@@ -84,9 +84,9 @@ class Kjfile:
         re = []
         meta = []
         for i in xrange(0, len(self.data)):
-        	tmp = Kjfile.workdanji(self.data[i])
-        	if len(tmp) > 1:
-        		meta.append(i)
+            tmp = Kjfile.workdanji(self.data[i])
+            if len(tmp) > 1:
+                meta.append(i)
             re.append(tmp[0])
             print self.data[i], re[i]
         return Kjfile(u''.join(re), meta)

@@ -3,7 +3,7 @@
 # filename: kanjic2j/lyrics.py
 # special for lyrics
 
-from bases import *
+from .bases import *
 
 
 class Lyrics(Kjfile):
