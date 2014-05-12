@@ -22,11 +22,13 @@ def index(request):
 	context={'form':form,'form2':form2}
 	return render(request,"kanji/index.html",context)
 
+__hightlight = "%s<span class='hred'>%s</span>%s"
 def work(request):
 	if request.method == 'POST':
 		if not request.POST.has_key('data'):
 			raise Http404
 		result = kj.Lyrics(request['data'])
+        
 		# TODO
 	else:
 		raise Http404
