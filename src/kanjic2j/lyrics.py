@@ -85,25 +85,20 @@ class Lyrics(Kjfile):
 
     def worksent(self, mstr):
         xtmp = []
-        meta = []
         for l in xrange(0, len(mstr)):
             qtmp = Lyrics.workdanji(mstr[l])
             xtmp.append(qtmp[0])
-            if len(qtmp) > 0:
-            	meta.append(l)
-        return (u''.join(xtmp), meta)
+        return u''.join(xtmp)
 
     def work(self):
         ptmp = []
-        meta = []
         for i in xrange(0, len(self.__tmpstr)):
             ptmp.append(self.__sps[i])
             if self.__flags[i]:
-                p1, p2 = self.worksent(self.__tmpstr[i])
+                p1 = self.worksent(self.__tmpstr[i])
                 ptmp[i] += p1
-                if len(p2) > 0:
-                    meta.append((i, p2))
             else:
                 ptmp[i] += self.__tmpstr[i]
         ptmp.append(self.__sps[-1])
-        return Kjfile(u''.join(ptmp), meta)
+        return Kjfile(u''.join(ptmp))
+
