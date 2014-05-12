@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from kanjic2j_web.forms import KanjiForm
 from kanjic2j_web.models import Log
-from kanjic2j_web.core import work
+import kanjic2j as kj
 import datetime
 
 def index(request):
@@ -22,3 +22,11 @@ def index(request):
 	context={'form':form,'form2':form2}
 	return render(request,"kanji/index.html",context)
 
+def work(request):
+	if request.method == 'POST':
+		if not request.POST.has_key('data'):
+			raise Http404
+		result = kj.Lyrics(request['data'])
+		# TODO
+	else:
+		raise Http404
