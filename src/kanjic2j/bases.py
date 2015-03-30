@@ -89,3 +89,4 @@ class Kjfile:
 
 def open_file(afile):
     return Kjfile(afile)
+

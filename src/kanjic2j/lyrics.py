@@ -30,6 +30,7 @@ class Lyrics(Kjfile):
     __splitch = [
         '\n', '/', '.', '(', ')', '\t', ' ',
         u'。', u'（', u'）', u'【', u'】',
+        '[', ']',
     ]
     __special = [
         u'凋叶棕',
@@ -92,7 +93,6 @@ class Lyrics(Kjfile):
 
     def work(self):
         ptmp = []
-        print self.__flags
         for i in xrange(0, len(self.__tmpstr)):
             ptmp.append(self.__sps[i])
             if self.__flags[i]:
